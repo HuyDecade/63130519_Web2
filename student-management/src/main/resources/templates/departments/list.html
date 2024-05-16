@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Department List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Department List</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="department : ${departments}">
+                    <td th:text="${department.id}">1</td>
+                    <td th:text="${department.code}">CS</td>
+                    <td th:text="${department.name}">Computer Science</td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/departments/edit/' + ${department.id}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/departments/delete/' + ${department.id}}">Delete</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(departments)}">
+                    <td colspan="4">No departments found.</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/departments/add">Add New Department</a>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

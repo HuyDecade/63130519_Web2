@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Class</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${class.id == null ? 'Add Class' : 'Edit Class'}"></h1>
+        <form th:action="@{${class.id == null} ? '/classes/add' : '/classes/edit/' + ${class.id}}" th:object="${class}" method="post">
+            <div class="form-group">
+                <label for="code">Code</label>
+                <input type="text" id="code" name="code" class="form-control" th:field="*{code}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher">Teacher</label>
+                <input type="text" id="teacher" name="teacher" class="form-control" th:field="*{teacher}" required>
+            </div>
+            <button type="submit" class="btn btn-success" th:text="${class.id == null ? 'Add' : 'Update'}"></button>
+        </form>
+        <a class="btn btn-secondary" href="/classes">Back to List</a>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

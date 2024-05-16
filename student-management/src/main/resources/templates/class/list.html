@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Class List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Class List</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Teacher</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="class : ${classes}">
+                    <td th:text="${class.id}">1</td>
+                    <td th:text="${class.code}">CS101</td>
+                    <td th:text="${class.name}">Computer Science</td>
+                    <td th:text="${class.teacher}">Dr. Smith</td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/classes/edit/' + ${class.id}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/classes/delete/' + ${class.id}}">Delete</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(classes)}">
+                    <td colspan="5">No classes found.</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/classes/add">Add New Class</a>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

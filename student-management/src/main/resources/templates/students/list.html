@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student List</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.id}">1</td>
+                    <td th:text="${student.name}">John Doe</td>
+                    <td th:text="${student.email}">john.doe@example.com</td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/students/edit/' + ${student.id}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/students/delete/' + ${student.id}}">Delete</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(students)}">
+                    <td colspan="4">No students found.</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-success" href="/students/add">Add New Student</a>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
