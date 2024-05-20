@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add/Edit Class</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>Add/Edit Subject</title>
+    <link rel="stylesheet" href="/css/subject.css">
 </head>
 <body>
     <th:block th:replace="~{/fragments/navbar :: nav}"></th:block>
     <div class="main-container">
         <th:block th:replace="~{/fragments/sidebar :: div}"></th:block>
         <div class="content">
-            <h1 th:text="${class.id == null ? 'Add New Class' : 'Edit Class'}"></h1>
-            <form th:action="@{${action}}" th:object="${class}" method="post">
+            <h1 th:text="${subject.id} == null ? 'Add Subject' : 'Edit Subject'"></h1>
+            <form th:action="@{${subject.id} == null ? '/subjects/add' : '/subjects/edit/' + ${subject.id}}" th:object="${subject}" method="post">
                 <div>
                     <label>Code:</label>
                     <input type="text" th:field="*{code}" />
@@ -20,18 +20,11 @@
                     <input type="text" th:field="*{name}" />
                 </div>
                 <div>
-                    <label>Teacher:</label>
-                    <input type="text" th:field="*{teacher}" />
-                </div>
-                <div>
-                    <label>Department:</label>
-                    <select th:field="*{department}">
-                        <option th:each="department : ${departments}" th:value="${department}" th:text="${department.name}"></option>
-                    </select>
+                    <label>Credits:</label>
+                    <input type="number" th:field="*{credits}" />
                 </div>
                 <div>
                     <button type="submit">Save</button>
-                    <a class="button" th:href="@{/classes}">Cancel</a>
                 </div>
             </form>
         </div>

@@ -23,20 +23,24 @@ public class ClassService {
         return classRepository.findById(id);
     }
 
-    public void addClass(Classes classes) {
-        classRepository.save(classes);
+    public void addClass(Classes aClass) {
+        classRepository.save(aClass);
     }
 
-    public void updateClass(Classes classes) {
-        classRepository.save(classes);
+    public void updateClass(Classes aClass) {
+        Optional<Classes> optionalClass = classRepository.findById(aClass.getId());
+        if (optionalClass.isPresent()) {
+            Classes existingClass = optionalClass.get();
+            existingClass.setCode(aClass.getCode());
+            existingClass.setName(aClass.getName());
+            existingClass.setTeacher(aClass.getTeacher());
+            existingClass.setDepartment(aClass.getDepartment());
+            // Update other fields as necessary
+            classRepository.save(existingClass);
+        }
     }
 
     public void deleteClassById(Long id) {
         classRepository.deleteById(id);
     }
-
-	public void deleteClassById(long id) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -1,5 +1,6 @@
 package com.example.managent.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.example.managent.model.Classes;
 import com.example.managent.service.ClassService;
+import com.example.managent.service.DepartmentService;
 
 @Controller
 @RequestMapping("/classes")
@@ -20,6 +23,9 @@ public class ClassController {
 
     @Autowired
     private ClassService classService;
+
+    @Autowired
+    private DepartmentService departmentService;
 
     @GetMapping
     public String listClasses(Model model) {
@@ -31,6 +37,7 @@ public class ClassController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("class", new Classes());
+        model.addAttribute("departments", departmentService.getAllDepartments());
         return "class/form";
     }
 
@@ -45,6 +52,7 @@ public class ClassController {
         Optional<Classes> aClass = classService.getClassById(id);
         if (aClass.isPresent()) {
             model.addAttribute("class", aClass.get());
+            model.addAttribute("departments", departmentService.getAllDepartments());
             return "class/form";
         } else {
             return "redirect:/classes";
@@ -52,9 +60,9 @@ public class ClassController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editClass(@PathVariable("id") long id, @ModelAttribute("class") Classes classes) {
-    	classes.setId(id);
-        classService.updateClass( classes);
+    public String editClass(@PathVariable("id") long id, @ModelAttribute("class") Classes aClass) {
+        aClass.setId(id);
+        classService.updateClass(aClass);
         return "redirect:/classes";
     }
 

@@ -15,19 +15,30 @@ public class SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    public List<Subject> findAll() {
+    public List<Subject> getAllSubjects() {
         return subjectRepository.findAll();
     }
 
-    public Optional<Subject> findById(Long id) {
+    public Optional<Subject> getSubjectById(Long id) {
         return subjectRepository.findById(id);
     }
 
-    public Subject save(Subject subject) {
-        return subjectRepository.save(subject);
+    public void addSubject(Subject subject) {
+        subjectRepository.save(subject);
     }
 
-    public void deleteById(Long id) {
+    public void updateSubject(Long id, Subject subjectDetails) {
+        Optional<Subject> optionalSubject = subjectRepository.findById(id);
+        if (optionalSubject.isPresent()) {
+            Subject subject = optionalSubject.get();
+            subject.setCode(subjectDetails.getCode());
+            subject.setName(subjectDetails.getName());
+            subject.setCredits(subjectDetails.getCredits());
+            subjectRepository.save(subject);
+        }
+    }
+
+    public void deleteSubjectById(Long id) {
         subjectRepository.deleteById(id);
     }
 }

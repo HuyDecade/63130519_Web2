@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Student List</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title>Students List</title>
+    <link rel="stylesheet" th:href="@{/css/student.css}">
 </head>
 <body>
-    <div class="container">
-        <h1>Student List</h1>
-        <table class="table table-striped">
-            <thead>
+    <th:block th:replace="~{/fragments/navbar :: nav}"></th:block>
+    <div class="main-container">
+        <th:block th:replace="~{/fragments/sidebar :: div}"></th:block>
+
+        <div class="content">
+            <h1>Students</h1>
+            <a th:href="@{/students/add}">Add New Student</a>
+            <table>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Actions</th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr th:each="student : ${students}">
-                    <td th:text="${student.id}">1</td>
-                    <td th:text="${student.name}">John Doe</td>
-                    <td th:text="${student.email}">john.doe@example.com</td>
+                    <td th:text="${student.id}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.email}"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/students/edit/' + ${student.id}}">Edit</a>
-                        <a class="btn btn-danger" th:href="@{'/students/delete/' + ${student.id}}">Delete</a>
+                        <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
+                        <a th:href="@{/students/delete/{id}(id=${student.id})}">Delete</a>
                     </td>
                 </tr>
-                <tr th:if="${#lists.isEmpty(students)}">
-                    <td colspan="4">No students found.</td>
-                </tr>
-            </tbody>
-        </table>
-        <a class="btn btn-success" href="/students/add">Add New Student</a>
+            </table>
+        </div>
     </div>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <div class="background-image"></div>
 </body>
 </html>

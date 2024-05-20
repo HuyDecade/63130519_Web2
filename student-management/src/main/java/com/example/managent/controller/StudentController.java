@@ -1,19 +1,16 @@
 package com.example.managent.controller;
 
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.managent.model.Student;
 import com.example.managent.service.StudentService;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/students")
@@ -42,21 +39,25 @@ public class StudentController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") long id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model) {
         Optional<Student> student = studentService.getStudentById(id);
-        model.addAttribute("student", student);
-        return "students/form";
+        if (student.isPresent()) {
+            model.addAttribute("student", student.get());
+            return "students/form";
+        } else {
+            return "redirect:/students";
+        }
     }
 
     @PostMapping("/edit/{id}")
-    public String editStudent(@PathVariable("id") long id, @ModelAttribute("student") Student student) {
+    public String editStudent(@PathVariable Long id, @ModelAttribute("student") Student student) {
         student.setId(id);
-        studentService.updateStudent(id, student);
+        studentService.addStudent(student);
         return "redirect:/students";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable("id") long id) {
+    public String deleteStudent(@PathVariable Long id) {
         studentService.deleteStudentById(id);
         return "redirect:/students";
     }
