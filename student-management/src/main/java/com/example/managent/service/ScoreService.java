@@ -15,19 +15,19 @@ public class ScoreService {
     @Autowired
     private ScoreRepository scoreRepository;
 
-    public List<Score> findAll() {
+    public List<Score> getAllScores() {
         return scoreRepository.findAll();
     }
 
-    public Optional<Score> findById(Long id) {
+    public Optional<Score> getScoreById(Long id) {
         return scoreRepository.findById(id);
     }
 
-    public Score save(Score score) {
+    public Score saveScore(Score score) {
         return scoreRepository.save(score);
     }
 
-    public void deleteById(Long id) {
+    public void deleteScore(Long id) {
         scoreRepository.deleteById(id);
     }
 }

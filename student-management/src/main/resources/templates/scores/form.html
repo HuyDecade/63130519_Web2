@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add/Edit Score</title>
+    <link rel="stylesheet" type="text/css" href="/css/scores.css">
+</head>
+<body>
+    <th:block th:replace="~{/fragments/navbar :: nav}"></th:block>
+    <div class="main-container">
+        <th:block th:replace="~{/fragments/sidebar :: div}"></th:block>
+        <main class="content">
+            <h1 th:text="${score.id == null ? 'Add Score' : 'Edit Score'}"></h1>
+            <form th:action="@{${score.id == null} ? '/scores/add' : '/scores/edit/' + ${score.id}}" th:object="${score}" method="post">
+                <div>
+                    <label for="student">Student ID:</label>
+                    <input type="text" id="student" name="studentId" th:field="*{student.id}" />
+                </div>
+                <div>
+                    <label for="class">Class ID:</label>
+                    <input type="text" id="class" name="classId" th:field="*{aClass.id}" />
+                </div>
+                <div>
+                    <label for="subject">Subject ID:</label>
+                    <input type="text" id="subject" name="subjectId" th:field="*{subject.id}" />
+                </div>
+                <div>
+                    <label for="midterm">Midterm Score:</label>
+                    <input type="number" id="midterm" name="midtermScore" th:field="*{midtermScore}" />
+                </div>
+                <div>
+                    <label for="final">Final Score:</label>
+                    <input type="number" id="final" name="finalScore" th:field="*{finalScore}" />
+                </div>
+                <div>
+                    <label for="bonus">Bonus Score:</label>
+                    <input type="number" id="bonus" name="bonusScore" th:field="*{bonusScore}" />
+                </div>
+                <div>
+                    <label for="total">Total Score:</label>
+                    <input type="number" id="total" name="totalScore" th:field="*{totalScore}" readonly />
+                </div>
+                <div>
+                    <button type="submit">Save</button>
+                    <a th:href="@{/scores/list}">Cancel</a>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

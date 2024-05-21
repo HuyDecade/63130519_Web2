@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Scores List</title>
+    <link rel="stylesheet" type="text/css" href="/css/scores.css">
+</head>
+<body>
+    <th:block th:replace="~{/fragments/navbar :: nav}"></th:block>
+    <div class="main-container">
+        <div th:replace="~{/fragments/sidebar :: div}"></div>
+        <main class="content">
+            <h1>Scores List</h1>
+            <a th:href="@{/scores/add}">Add New Score</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Class ID</th>
+                        <th>Subject ID</th>
+                        <th>Midterm Score</th>
+                        <th>Final Score</th>
+                        <th>Bonus Score</th>
+                        <th>Total Score</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="score : ${scores}">
+                        <td th:text="${score.student.id}"></td>
+                        <td th:text="${score.aClass.id}"></td>
+                        <td th:text="${score.subject.id}"></td>
+                        <td th:text="${score.midtermScore}"></td>
+                        <td th:text="${score.finalScore}"></td>
+                        <td th:text="${score.bonusScore}"></td>
+                        <td th:text="${score.totalScore}"></td>
+                        <td>
+                            <a th:href="@{/scores/edit/{id}(id=${score.id})}">Edit</a>
+                            <a th:href="@{/scores/delete/{id}(id=${score.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
