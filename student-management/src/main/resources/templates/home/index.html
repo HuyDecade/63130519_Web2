@@ -7,17 +7,14 @@
     <link rel="stylesheet" th:href="@{/css/scores.css}">
 </head>
 <body>
-    <th:block th:replace="~{/fragments/navbar :: nav}"></th:block>
+    <th:block th:replace="~{/fragments/navbar2 :: nav}"></th:block>
     <div class="main-container">
-        <th:block th:replace="~{/fragments/sidebar :: div}"></th:block>
+     
+        <!-- <th:block th:replace="~{/fragments/sidebar :: div}"></th:block> -->
         <!-- Nội dung trang -->
         <div class="content">
             <h1>Welcome to Our Management System</h1>
-            <a href="/students" class="btn btn-primary">View Students</a>
-            <a href="/subjects" class="btn btn-primary">View Subjects</a>
-            <a href="/classes" class="btn btn-primary">View Classes</a>
-            <a href="/departments" class="btn btn-primary">View Departments</a>
-            <a href="/scores/list" class="btn btn-primary">View Scores</a>
+            
         </div>
     </div>
     <div class="background-image"></div>
