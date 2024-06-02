@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.managent.model.User;
@@ -51,6 +52,22 @@ public class LoginController {
             System.out.println("Tên người dùng không tồn tại.");
             model.addAttribute("errorMessage", "Tên người dùng hoặc mật khẩu không chính xác!");
             return "login";
+        } 
+    }
+    // từ chỗ này
+    @GetMapping("/search")
+    public String searchUserById(@RequestParam(value = "userId", required = false) Long userId, Model model) {
+        if (userId == null) {
+            model.addAttribute("errorMessage", "User ID is required");
+            return "find/search";
+        }
+        try {
+            User user = userService.findUserById(userId);
+            model.addAttribute("user", user);
+            return "find/search";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "User not found");
+            return "find/search";
         }
     }
 }

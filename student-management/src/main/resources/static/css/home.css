@@ -7,6 +7,11 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fvi.pngtree.com%2Ffree-backgrounds-photos%2Fsinh-vi%25C3%25AAn&psig=AOvVaw3huBrurxUzQmldJ97pkaFb&ust=1717401711122000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLD58Im6vIYDFQAAAAAdAAAAABAQ'); /* Đường dẫn tới hình nền */
+    background-size: cover; /* Để hình nền bao phủ toàn bộ trang */
+    background-position: center; /* Căn giữa hình nền */
+    background-repeat: no-repeat; /* Không lặp lại hình nền */
+    background-attachment: fixed; /* Hình nền cố định khi cuộn */
 }
 
 .navbar {
@@ -49,19 +54,22 @@ body {
     text-decoration: underline;
 }
 
+/* Main container for sidebar and content */
 .main-container {
     display: flex;
-    margin-top: 50px; /* Adjust this value to ensure it clears the navbar */
+    margin-top: 60px; /* Adjust this value to ensure it clears the navbar */
 }
 
 .sidebar {
     width: 200px;
     background-color: #f4f4f4;
     padding: 15px;
-    height: 100vh;
+    height: calc(100vh - 60px); /* Adjusted for the height of the navbar */
     position: fixed;
-    top: 50px; /* Adjust this value to ensure it aligns with the navbar */
+    top: 60px; /* Adjust this value to ensure it aligns with the navbar */
     left: 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-nav {
@@ -76,14 +84,26 @@ body {
 .sidebar-nav li a {
     color: #333;
     text-decoration: none;
+    display: block;
+    padding: 10px;
 }
 
 .sidebar-nav li a:hover {
-    text-decoration: underline;
+    background-color: #ddd;
 }
 
 .content {
     margin-left: 220px; /* Adjust this value based on the width of the sidebar */
     padding: 20px;
     flex: 1;
+    background: rgba(255, 255, 255, 0.8); /* Màu nền trắng với độ mờ để làm nổi bật nội dung */
+    border-radius: 8px;
 }
+
+/* Basic form and table styles */
+form {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
